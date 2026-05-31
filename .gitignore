@@ -1,0 +1,13 @@
+node_modules
+.next
+.vercel
+.env
+.env.local
+.env.*.local
+coverage
+playwright-report
+test-results
+tsconfig.tsbuildinfo
+docs/planning/
+docs/product-architecture.md
+Associate Product Manager - Interview task.pdf

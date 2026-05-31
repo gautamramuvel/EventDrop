@@ -1,0 +1,50 @@
+import { format } from "date-fns";
+import { notFound } from "next/navigation";
+import { ReportForm } from "@/components/report-form";
+import { RsvpButton } from "@/components/rsvp-button";
+import { getEventDetail } from "@/lib/events/repository";
+import { createSupabaseAdminClient } from "@/lib/supabase/server";
+
+export const dynamic = "force-dynamic";
+
+export default async function EventDetailPage({ params }: { params: Promise<{ eventId: string }> }) {
+  const { eventId } = await params;
+  const event = await getEventDetail(createSupabaseAdminClient(), eventId);
+
+  if (!event || event.hiddenAt) notFound();
+
+  return (
+    <main className="mx-auto max-w-3xl px-4 py-8">
+      <p className="text-sm font-semibold uppercase text-accent">{event.category}</p>
+      <h1 className="mt-2 text-4xl font-semibold">{event.title}</h1>
+      <p className="mt-3 text-neutral-700">{event.description}</p>
+      <dl className="mt-6 grid gap-3 rounded-ui border border-line bg-white p-4 text-sm">
+        <div>
+          <dt className="font-semibold">When</dt>
+          <dd>
+            {format(new Date(event.startAt), "PPp")} - {format(new Date(event.endAt), "p")}
+          </dd>
+        </div>
+        <div>
+          <dt className="font-semibold">Where</dt>
+          <dd>{event.addressText}</dd>
+        </div>
+        <div>
+          <dt className="font-semibold">Going</dt>
+          <dd>
+            {event.rsvpCount}
+            {event.capacity ? `/${event.capacity}` : ""}
+          </dd>
+        </div>
+        <div>
+          <dt className="font-semibold">Host</dt>
+          <dd>{event.creatorName}</dd>
+        </div>
+      </dl>
+      <div className="mt-6">
+        <RsvpButton eventId={event.id} hasRsvped={event.viewerHasRsvped} />
+      </div>
+      <ReportForm eventId={event.id} />
+    </main>
+  );
+}
