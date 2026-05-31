@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { EVENT_CATEGORIES, EVENT_DURATIONS_MINUTES } from "@/lib/constants";
+import { toIsoDateTimeLocal } from "@/lib/events/form";
 
 export function EventForm() {
   const router = useRouter();
@@ -23,7 +24,7 @@ export function EventForm() {
         addressText: formData.get("addressText"),
         latitude: Number(formData.get("latitude")),
         longitude: Number(formData.get("longitude")),
-        startAt: formData.get("startAt"),
+        startAt: toIsoDateTimeLocal(formData.get("startAt")),
         durationMinutes: Number(formData.get("durationMinutes")),
         capacity: formData.get("capacity") ? Number(formData.get("capacity")) : null
       })

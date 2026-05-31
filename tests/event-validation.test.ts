@@ -67,4 +67,26 @@ describe("parseEventInput", () => {
 
     expect(parsed.success).toBe(false);
   });
+
+  it("accepts datetime-local values from the event form", () => {
+    const parsed = parseEventInput(
+      {
+        title: "Study group",
+        description: "Calculus review before finals",
+        category: "Study",
+        addressText: "Main Library",
+        latitude: 40.73061,
+        longitude: -73.935242,
+        startAt: "2026-06-01T23:30",
+        durationMinutes: 60,
+        capacity: null
+      },
+      baseDate
+    );
+
+    expect(parsed.success).toBe(true);
+    if (parsed.success) {
+      expect(parsed.data.startAt.toISOString()).toBe(new Date("2026-06-01T23:30").toISOString());
+    }
+  });
 });

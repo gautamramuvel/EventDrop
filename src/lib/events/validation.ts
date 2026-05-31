@@ -9,7 +9,7 @@ const eventInputSchema = z.object({
   addressText: z.string().trim().min(3).max(160),
   latitude: z.number().min(-90).max(90),
   longitude: z.number().min(-180).max(180),
-  startAt: z.string().datetime(),
+  startAt: z.string().trim().min(1),
   durationMinutes: z.union([z.literal(30), z.literal(60), z.literal(120), z.literal(240)]),
   capacity: z.number().int().min(1).max(500).nullable()
 });
@@ -50,6 +50,10 @@ export function parseEventInput(
   }
 
   const startAt = new Date(parsed.data.startAt);
+  if (Number.isNaN(startAt.getTime())) {
+    return { success: false, error: "Start time must be a valid date and time" };
+  }
+
   const latestStart = addMinutes(now, 24 * 60);
 
   if (isBefore(startAt, now)) {
