@@ -6,8 +6,9 @@ describe("readEnv", () => {
     const env = readEnv({
       NEXT_PUBLIC_SUPABASE_URL: "https://example.supabase.co",
       SUPABASE_SERVICE_ROLE_KEY: "service-role",
-      RESEND_API_KEY: "resend",
-      RESEND_FROM_EMAIL: "EventDrop <hello@example.com>",
+      GMAIL_SMTP_USER: "sender@gmail.com",
+      GMAIL_SMTP_APP_PASSWORD: "app-password",
+      REMINDER_FROM_EMAIL: "EventDrop <sender@gmail.com>",
       INTERNAL_JOB_SECRET: "secret-value",
       ADMIN_CLERK_USER_IDS: "user_1,user_2",
       REMINDER_TEST_MODE: "false"

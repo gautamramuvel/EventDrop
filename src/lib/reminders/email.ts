@@ -1,5 +1,5 @@
 import "server-only";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import { readEnv } from "@/lib/env";
 
 export async function sendEventReminderEmail(input: {
@@ -14,17 +14,20 @@ export async function sendEventReminderEmail(input: {
     return { id: `test-${Date.now()}` };
   }
 
-  const resend = new Resend(env.resendApiKey);
-  const result = await resend.emails.send({
-    from: env.resendFromEmail,
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: env.gmailSmtpUser,
+      pass: env.gmailSmtpAppPassword
+    }
+  });
+
+  const result = await transporter.sendMail({
+    from: env.reminderFromEmail,
     to: input.to,
     subject: `Reminder: ${input.eventTitle} starts soon`,
     text: `${input.eventTitle} starts at ${new Date(input.eventStartAt).toLocaleString()}.\nLocation: ${input.eventAddress}`
   });
 
-  if (result.error) {
-    throw new Error(result.error.message);
-  }
-
-  return { id: result.data?.id ?? "sent" };
+  return { id: result.messageId };
 }

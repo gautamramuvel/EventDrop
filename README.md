@@ -1,11 +1,11 @@
 # EventDrop
 
-A hyperlocal 24-hour neighborhood event board built with Next.js, Clerk, Supabase PostGIS, Supabase Cron, and Resend.
+A hyperlocal 24-hour neighborhood event board built with Next.js, Clerk, Supabase PostGIS, Supabase Cron, and Gmail SMTP.
 
 ## Local Setup
 
 1. Copy `.env.example` to `.env.local`.
-2. Fill Clerk, Supabase, Resend, and internal job secret values.
+2. Fill Clerk, Supabase, Gmail SMTP, and internal job secret values.
 3. Install dependencies with `npm install`.
 4. Run `npm run dev`.
 
@@ -20,8 +20,9 @@ Run `supabase/seed.sql` to add launch-zone and demo events.
 - `CLERK_SECRET_KEY`
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
-- `RESEND_API_KEY`
-- `RESEND_FROM_EMAIL`
+- `GMAIL_SMTP_USER`
+- `GMAIL_SMTP_APP_PASSWORD`
+- `REMINDER_FROM_EMAIL`
 - `INTERNAL_JOB_SECRET`
 - `NEXT_PUBLIC_DEFAULT_LAT`
 - `NEXT_PUBLIC_DEFAULT_LNG`
@@ -40,13 +41,13 @@ EventDrop uses Supabase Cron for 30-minute RSVP reminders.
 
 ## Architecture Summary
 
-Next.js on Vercel serves the public UI and API routes. Clerk protects write actions. Supabase Postgres with PostGIS stores events and powers distance filtering. Supabase Cron runs reminder checks and calls a protected Vercel route. Resend sends transactional reminder email.
+Next.js on Vercel serves the public UI and API routes. Clerk protects write actions. Supabase Postgres with PostGIS stores events and powers distance filtering. Supabase Cron runs reminder checks and calls a protected Vercel route. Gmail SMTP sends transactional reminder email.
 
 ## Deployment Notes
 
 1. Create Supabase project and run SQL files in `supabase/`.
 2. Create Clerk app and copy keys into Vercel env vars.
-3. Create Resend API key and sender.
+3. Create a Gmail app password for reminder email.
 4. Deploy to Vercel.
 5. Configure Supabase Cron after the Vercel URL exists.
 
