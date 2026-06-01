@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "EventDrop",
-  description: "24-hour neighborhood event board"
+  description: "A hyperlocal 24-hour neighborhood event board"
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

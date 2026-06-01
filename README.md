@@ -1,6 +1,6 @@
 # EventDrop
 
-24-hour neighborhood event board built with Next.js, Clerk, Supabase PostGIS, Supabase Cron, and Resend.
+A hyperlocal 24-hour neighborhood event board built with Next.js, Clerk, Supabase PostGIS, Supabase Cron, and Resend.
 
 ## Local Setup
 
