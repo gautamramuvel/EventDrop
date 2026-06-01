@@ -2,9 +2,9 @@ delete from events;
 
 insert into profiles (id, clerk_user_id, email, first_name, avatar_url)
 values
-  ('00000000-0000-0000-0000-000000000001', 'seed_creator_1', 'maya@example.com', 'Maya', null),
-  ('00000000-0000-0000-0000-000000000002', 'seed_creator_2', 'noah@example.com', 'Noah', null),
-  ('00000000-0000-0000-0000-000000000003', 'seed_creator_3', 'anika@example.com', 'Anika', null)
+  ('00000000-0000-0000-0000-000000000001', 'seed_creator_1', 'gautam.ramuvel15@gmail.com', 'Gautam', null),
+  ('00000000-0000-0000-0000-000000000002', 'seed_creator_2', 'gautam.ramuvel15@gmail.com', 'Gautam', null),
+  ('00000000-0000-0000-0000-000000000003', 'seed_creator_3', 'gautam.ramuvel15@gmail.com', 'Gautam', null)
 on conflict (id) do update
 set
   clerk_user_id = excluded.clerk_user_id,
