@@ -1,13 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { formatLocalDateTimeRange, formatLocalTime } from "@/lib/dates/display";
+import { formatLocalDateTime, formatLocalDateTimeRange, formatLocalTime } from "@/lib/dates/display";
 
 export function LocalTime({ value }: { value: string }) {
   const [label, setLabel] = useState("");
 
   useEffect(() => {
     setLabel(formatLocalTime(value));
+  }, [value]);
+
+  return (
+    <time dateTime={value} suppressHydrationWarning>
+      {label}
+    </time>
+  );
+}
+
+export function LocalDateTime({ value }: { value: string }) {
+  const [label, setLabel] = useState("");
+
+  useEffect(() => {
+    setLabel(formatLocalDateTime(value));
   }, [value]);
 
   return (

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LocalTime } from "@/components/local-date-time";
+import { LocalDateTime } from "@/components/local-date-time";
 import type { EventSummary } from "@/lib/types";
 
 export function EventCard({ event }: { event: EventSummary }) {
@@ -13,7 +13,7 @@ export function EventCard({ event }: { event: EventSummary }) {
           <h2 className="mt-1 text-xl font-semibold">{event.title}</h2>
         </div>
         <span className="rounded-ui bg-paper px-2 py-1 text-xs">
-          <LocalTime value={event.startAt} />
+          <LocalDateTime value={event.startAt} />
         </span>
       </div>
       <p className="mt-2 line-clamp-2 text-sm text-neutral-600">{event.description}</p>
