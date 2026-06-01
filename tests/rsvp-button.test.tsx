@@ -30,4 +30,16 @@ describe("RsvpButton", () => {
     });
     expect(screen.getByRole("button", { name: "Sign in or create account" })).toBeVisible();
   });
+
+  it("disables RSVP when viewer already attends", () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+
+    render(<RsvpButton eventId="event_1" hasRsvped={true} />);
+
+    const button = screen.getByRole("button", { name: "You are attending this event" });
+    expect(button).toBeDisabled();
+    fireEvent.click(button);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
 });

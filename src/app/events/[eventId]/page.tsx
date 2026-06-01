@@ -1,7 +1,9 @@
 import { format } from "date-fns";
+import { currentUser } from "@clerk/nextjs/server";
 import { notFound } from "next/navigation";
 import { ReportForm } from "@/components/report-form";
 import { RsvpButton } from "@/components/rsvp-button";
+import { requireSyncedProfile } from "@/lib/auth/profile";
 import { getEventDetail } from "@/lib/events/repository";
 import { createSupabaseAdminClient } from "@/lib/supabase/server";
 
@@ -9,7 +11,9 @@ export const dynamic = "force-dynamic";
 
 export default async function EventDetailPage({ params }: { params: Promise<{ eventId: string }> }) {
   const { eventId } = await params;
-  const event = await getEventDetail(createSupabaseAdminClient(), eventId);
+  const user = await currentUser();
+  const profile = user ? await requireSyncedProfile(user) : null;
+  const event = await getEventDetail(createSupabaseAdminClient(), eventId, profile?.id);
 
   if (!event || event.hiddenAt) notFound();
 

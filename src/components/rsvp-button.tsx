@@ -11,12 +11,20 @@ export function RsvpButton({ eventId, hasRsvped }: { eventId: string; hasRsvped:
   const [error, setError] = useState<string | null>(null);
   const [showSignIn, setShowSignIn] = useState(false);
 
+  if (hasRsvped) {
+    return (
+      <button disabled className="rounded-ui bg-accent px-4 py-3 font-medium text-white disabled:opacity-80">
+        You are attending this event
+      </button>
+    );
+  }
+
   async function toggle() {
     setPending(true);
     setError(null);
     setShowSignIn(false);
 
-    const response = await fetch(`/api/events/${eventId}/rsvp`, { method: hasRsvped ? "DELETE" : "POST" });
+    const response = await fetch(`/api/events/${eventId}/rsvp`, { method: "POST" });
     const payload = await response.json();
     setPending(false);
 
@@ -38,7 +46,7 @@ export function RsvpButton({ eventId, hasRsvped }: { eventId: string; hasRsvped:
         </SignInButton>
       )}
       <button onClick={toggle} disabled={pending} className="rounded-ui bg-ink px-4 py-3 font-medium text-white disabled:opacity-60">
-        {pending ? "Saving..." : hasRsvped ? "Cancel RSVP" : "RSVP"}
+        {pending ? "Saving..." : "RSVP"}
       </button>
     </div>
   );
