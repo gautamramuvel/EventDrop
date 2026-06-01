@@ -1,6 +1,6 @@
-import { format } from "date-fns";
 import { currentUser } from "@clerk/nextjs/server";
 import { notFound } from "next/navigation";
+import { LocalDateTimeRange } from "@/components/local-date-time";
 import { ReportForm } from "@/components/report-form";
 import { RsvpButton } from "@/components/rsvp-button";
 import { requireSyncedProfile } from "@/lib/auth/profile";
@@ -28,7 +28,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ ev
         <div>
           <dt className="font-semibold">When</dt>
           <dd>
-            {format(new Date(event.startAt), "PPp")} - {format(new Date(event.endAt), "p")}
+            <LocalDateTimeRange startAt={event.startAt} endAt={event.endAt} />
           </dd>
         </div>
         <div>
