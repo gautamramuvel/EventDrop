@@ -6,6 +6,7 @@ const envSchema = z.object({
   GMAIL_SMTP_USER: z.string().email(),
   GMAIL_SMTP_APP_PASSWORD: z.string().min(8),
   REMINDER_FROM_EMAIL: z.string().min(3),
+  REMINDER_TIME_ZONE: z.string().min(1).default("Asia/Kolkata"),
   INTERNAL_JOB_SECRET: z.string().min(8),
   ADMIN_CLERK_USER_IDS: z.string().default(""),
   REMINDER_TEST_MODE: z.enum(["true", "false"]).default("false")
@@ -20,6 +21,7 @@ export function readEnv(source: Record<string, string | undefined> = process.env
     gmailSmtpUser: parsed.GMAIL_SMTP_USER,
     gmailSmtpAppPassword: parsed.GMAIL_SMTP_APP_PASSWORD,
     reminderFromEmail: parsed.REMINDER_FROM_EMAIL,
+    reminderTimeZone: parsed.REMINDER_TIME_ZONE,
     internalJobSecret: parsed.INTERNAL_JOB_SECRET,
     adminClerkUserIds: parsed.ADMIN_CLERK_USER_IDS.split(",")
       .map((id) => id.trim())

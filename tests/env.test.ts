@@ -9,6 +9,7 @@ describe("readEnv", () => {
       GMAIL_SMTP_USER: "sender@gmail.com",
       GMAIL_SMTP_APP_PASSWORD: "app-password",
       REMINDER_FROM_EMAIL: "EventDrop <sender@gmail.com>",
+      REMINDER_TIME_ZONE: "Asia/Kolkata",
       INTERNAL_JOB_SECRET: "secret-value",
       ADMIN_CLERK_USER_IDS: "user_1,user_2",
       REMINDER_TEST_MODE: "false"
@@ -16,6 +17,7 @@ describe("readEnv", () => {
 
     expect(env.adminClerkUserIds).toEqual(["user_1", "user_2"]);
     expect(env.reminderTestMode).toBe(false);
+    expect(env.reminderTimeZone).toBe("Asia/Kolkata");
   });
 
   it("throws when required server env is missing", () => {

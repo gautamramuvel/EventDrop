@@ -21,6 +21,7 @@ describe("sendEventReminderEmail", () => {
     vi.stubEnv("GMAIL_SMTP_USER", "sender@gmail.com");
     vi.stubEnv("GMAIL_SMTP_APP_PASSWORD", "app-password");
     vi.stubEnv("REMINDER_FROM_EMAIL", "EventDrop <sender@gmail.com>");
+    vi.stubEnv("REMINDER_TIME_ZONE", "Asia/Kolkata");
     vi.stubEnv("INTERNAL_JOB_SECRET", "secret-value");
     vi.stubEnv("REMINDER_TEST_MODE", "false");
     sendMail.mockResolvedValue({ messageId: "gmail-message-id" });
@@ -44,7 +45,8 @@ describe("sendEventReminderEmail", () => {
       expect.objectContaining({
         from: "EventDrop <sender@gmail.com>",
         to: "guest@example.com",
-        subject: "Reminder: Pickup hoops starts soon"
+        subject: "Reminder: Pickup hoops starts soon",
+        text: "Pickup hoops starts at 6/1/26, 9:52:00 AM.\nLocation: 4th Street Park"
       })
     );
     expect(result).toEqual({ id: "gmail-message-id" });

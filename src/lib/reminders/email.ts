@@ -1,5 +1,6 @@
 import "server-only";
 import nodemailer from "nodemailer";
+import { formatLocalDateTime } from "@/lib/dates/display";
 import { readEnv } from "@/lib/env";
 
 export async function sendEventReminderEmail(input: {
@@ -26,7 +27,9 @@ export async function sendEventReminderEmail(input: {
     from: env.reminderFromEmail,
     to: input.to,
     subject: `Reminder: ${input.eventTitle} starts soon`,
-    text: `${input.eventTitle} starts at ${new Date(input.eventStartAt).toLocaleString()}.\nLocation: ${input.eventAddress}`
+    text: `${input.eventTitle} starts at ${formatLocalDateTime(input.eventStartAt, {
+      timeZone: env.reminderTimeZone
+    })}.\nLocation: ${input.eventAddress}`
   });
 
   return { id: result.messageId };

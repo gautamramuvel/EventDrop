@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatLocalDateTimeRange, formatLocalTime } from "@/lib/dates/display";
+import { formatLocalDateTime, formatLocalDateTimeRange, formatLocalTime } from "@/lib/dates/display";
 
 describe("date display", () => {
   it("formats stored UTC instants in the viewer timezone", () => {
@@ -10,5 +10,6 @@ describe("date display", () => {
     expect(formatLocalDateTimeRange(startAt, endAt, { locale: "en-US", timeZone: "Asia/Kolkata" })).toBe(
       "Jun 1, 2026, 9:52 AM - 10:22 AM"
     );
+    expect(formatLocalDateTime(startAt, { locale: "en-US", timeZone: "Asia/Kolkata" })).toBe("6/1/26, 9:52:00 AM");
   });
 });
