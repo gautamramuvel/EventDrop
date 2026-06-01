@@ -23,6 +23,7 @@ Run `supabase/seed.sql` to add launch-zone and demo events.
 - `GMAIL_SMTP_USER`
 - `GMAIL_SMTP_APP_PASSWORD`
 - `REMINDER_FROM_EMAIL`
+- `REMINDER_TIME_ZONE`
 - `INTERNAL_JOB_SECRET`
 - `NEXT_PUBLIC_DEFAULT_LAT`
 - `NEXT_PUBLIC_DEFAULT_LNG`
@@ -37,7 +38,8 @@ EventDrop uses Supabase Cron for 30-minute RSVP reminders.
 1. Deploy the Vercel app.
 2. Set `INTERNAL_JOB_SECRET` in Vercel.
 3. Run the commented `cron.schedule` SQL from `supabase/migrations/0001_init.sql`, replacing the deployed URL and secret.
-4. For local/demo testing, set `REMINDER_TEST_MODE=true` to avoid sending real email while still exercising the reminder worker.
+4. Set `REMINDER_TIME_ZONE` to the event market timezone, for example `Asia/Kolkata`.
+5. For local/demo testing, set `REMINDER_TEST_MODE=true` to avoid sending real email while still exercising the reminder worker.
 
 ## Architecture Summary
 
@@ -50,6 +52,7 @@ Next.js on Vercel serves the public UI and API routes. Clerk protects write acti
 3. Create a Gmail app password for reminder email.
 4. Deploy to Vercel.
 5. Configure Supabase Cron after the Vercel URL exists.
+6. Run `supabase/seed.sql` when you want a clean reviewer demo dataset.
 
 ## Test Credentials
 

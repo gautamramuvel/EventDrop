@@ -26,7 +26,7 @@ flowchart LR
   API --> DB[(Supabase Postgres + PostGIS)]
   DB --> Cron[Supabase Cron]
   Cron --> Worker[Reminder Endpoint]
-  Worker --> Resend[Resend Email]
+  Worker --> Gmail[Gmail SMTP]
 ```
 
 ## Technical Decisions
@@ -36,7 +36,7 @@ flowchart LR
 - Supabase Postgres/PostGIS: supports durable storage and distance queries.
 - Clerk: verified user identity for write actions while browse remains public.
 - Supabase Cron: supports frequent reminder checks beyond Vercel Hobby Cron limits.
-- Resend: simple transactional email API.
+- Gmail SMTP: sends reviewer-ready reminder emails without requiring a custom sending domain for the prototype.
 
 ## Data Storage and Access
 
