@@ -1,6 +1,7 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { notFound } from "next/navigation";
 import { LocalDateTimeRange } from "@/components/local-date-time";
+import { BackToEventsLink } from "@/components/page-nav";
 import { ReportForm } from "@/components/report-form";
 import { RsvpButton } from "@/components/rsvp-button";
 import { requireSyncedProfile } from "@/lib/auth/profile";
@@ -21,6 +22,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ ev
 
   return (
     <main className="mx-auto max-w-3xl px-4 py-8">
+      <BackToEventsLink />
       <p className="text-sm font-semibold uppercase text-accent">{event.category}</p>
       <h1 className="mt-2 text-4xl font-semibold">{event.title}</h1>
       <p className="mt-3 text-neutral-700">{event.description}</p>
