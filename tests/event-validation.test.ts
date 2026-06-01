@@ -27,11 +27,11 @@ describe("parseEventInput", () => {
     }
   });
 
-  it("rejects events starting more than 24 hours ahead", () => {
+  it("accepts events starting more than 24 hours ahead", () => {
     const parsed = parseEventInput(
       {
-        title: "Too late",
-        description: "Outside MVP window",
+        title: "Weekend study meetup",
+        description: "Planning session for Saturday",
         category: "Social",
         addressText: "Library",
         latitude: 40.73061,
@@ -43,10 +43,29 @@ describe("parseEventInput", () => {
       baseDate
     );
 
-    expect(parsed.success).toBe(false);
-    if (!parsed.success) {
-      expect(parsed.error).toContain("within the next 24 hours");
+    expect(parsed.success).toBe(true);
+    if (parsed.success) {
+      expect(parsed.data.startAt.toISOString()).toBe("2026-06-02T13:00:00.000Z");
     }
+  });
+
+  it("accepts past event dates for archive visibility", () => {
+    const parsed = parseEventInput(
+      {
+        title: "Yesterday open mic",
+        description: "Archive entry for a completed event",
+        category: "Creative",
+        addressText: "Corner Cafe",
+        latitude: 40.73061,
+        longitude: -73.935242,
+        startAt: "2026-05-31T20:00:00.000Z",
+        durationMinutes: 120,
+        capacity: 25
+      },
+      baseDate
+    );
+
+    expect(parsed.success).toBe(true);
   });
 
   it("rejects unsupported categories and durations", () => {

@@ -2,11 +2,11 @@
 
 ## Problem
 
-There is no dominant product for spontaneous, hyperlocal, ephemeral social discovery. EventDrop focuses on events happening within the next 24 hours in one neighborhood or campus.
+There is no dominant product for spontaneous, hyperlocal, ephemeral social discovery. EventDrop defaults to events happening within the next 24 hours in one neighborhood or campus, while still allowing future and past event discovery through filters.
 
 ## Target User
 
-Urban renters and college students aged 22 to 35 who want low-commitment same-day social options nearby.
+Urban renters and college students aged 22 to 35 who want low-commitment nearby social options.
 
 ## Core Flows
 

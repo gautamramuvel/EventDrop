@@ -23,4 +23,12 @@ describe("parseEventQuery", () => {
       longitude: -73.9
     });
   });
+
+  it("parses beyond 24 hours and past event filters", () => {
+    const beyond = parseEventQuery(new URL("https://app.test/api/events?window=beyond24h"));
+    const past = parseEventQuery(new URL("https://app.test/api/events?window=past"));
+
+    expect(beyond.window).toBe("beyond24h");
+    expect(past.window).toBe("past");
+  });
 });

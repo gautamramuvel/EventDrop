@@ -1,26 +1,18 @@
 import "server-only";
-import { addHours } from "date-fns";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import type { EventCategory, TimeWindow } from "@/lib/constants";
+import type { EventCategory } from "@/lib/constants";
 import type { EventQuery } from "@/lib/events/query";
 import type { ParsedEventInput } from "@/lib/events/validation";
 import type { EventDetail, EventSummary } from "@/lib/types";
 
-function windowEnd(window: TimeWindow, now: Date) {
-  if (window === "now") return addHours(now, 1);
-  if (window === "next4h") return addHours(now, 4);
-  return addHours(now, 24);
-}
-
-export async function listEvents(supabase: SupabaseClient, query: EventQuery, now = new Date()): Promise<EventSummary[]> {
+export async function listEvents(supabase: SupabaseClient, query: EventQuery): Promise<EventSummary[]> {
   const meters = query.distanceMiles * 1609.344;
-  const end = windowEnd(query.window, now).toISOString();
 
   const { data, error } = await supabase.rpc("list_visible_events", {
     p_lat: query.latitude,
     p_lng: query.longitude,
     p_radius_meters: meters,
-    p_window_end: end,
+    p_time_window: query.window,
     p_category: query.category === "all" ? null : query.category
   });
 

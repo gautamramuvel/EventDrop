@@ -5,7 +5,7 @@ export default function NewEventPage() {
   return (
     <main className="mx-auto max-w-2xl px-4 py-8">
       <h1 className="text-3xl font-semibold">Drop an event</h1>
-      <p className="mt-2 text-sm text-neutral-600">Start time must be within 24 hours and inside the launch area.</p>
+      <p className="mt-2 text-sm text-neutral-600">Create an event for any date inside the launch area.</p>
       <div className="mt-6">
         <SignedOut>
           <SignInButton mode="modal">

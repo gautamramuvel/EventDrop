@@ -1,4 +1,4 @@
-import { addMinutes, isAfter, isBefore } from "date-fns";
+import { addMinutes } from "date-fns";
 import { z } from "zod";
 import { EVENT_CATEGORIES } from "@/lib/constants";
 
@@ -52,16 +52,6 @@ export function parseEventInput(
   const startAt = new Date(parsed.data.startAt);
   if (Number.isNaN(startAt.getTime())) {
     return { success: false, error: "Start time must be a valid date and time" };
-  }
-
-  const latestStart = addMinutes(now, 24 * 60);
-
-  if (isBefore(startAt, now)) {
-    return { success: false, error: "Start time must be in the future" };
-  }
-
-  if (isAfter(startAt, latestStart) || startAt.getTime() === latestStart.getTime()) {
-    return { success: false, error: "Start time must be within the next 24 hours" };
   }
 
   return {

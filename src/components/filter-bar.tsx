@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { DISTANCE_MILES, EVENT_CATEGORIES, TIME_WINDOWS } from "@/lib/constants";
+import { DISTANCE_MILES, EVENT_CATEGORIES, TIME_WINDOW_LABELS, TIME_WINDOWS } from "@/lib/constants";
 
 export function FilterBar() {
   const router = useRouter();
@@ -38,7 +38,7 @@ export function FilterBar() {
         >
           {TIME_WINDOWS.map((window) => (
             <option key={window} value={window}>
-              {window}
+              {TIME_WINDOW_LABELS[window]}
             </option>
           ))}
         </select>

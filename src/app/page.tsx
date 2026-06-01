@@ -20,7 +20,7 @@ export default async function HomePage({ searchParams }: { searchParams: Promise
     <main className="mx-auto grid max-w-6xl gap-6 px-4 py-8">
       <section>
         <h1 className="text-3xl font-semibold">All Events</h1>
-        <p className="mt-2 text-neutral-600">Spontaneous drops happening nearby in the next 24 hours.</p>
+        <p className="mt-2 text-neutral-600">Spontaneous drops nearby. Default view shows the next 24 hours.</p>
       </section>
       <FilterBar />
       <EventList events={events} />
