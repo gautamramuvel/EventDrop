@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { useState } from "react";
 
-export function RsvpButton({ eventId, hasRsvped }: { eventId: string; hasRsvped: boolean }) {
+export function RsvpButton({ eventId, hasRsvped, disabledReason }: { eventId: string; hasRsvped: boolean; disabledReason?: string }) {
   const router = useRouter();
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -15,6 +15,14 @@ export function RsvpButton({ eventId, hasRsvped }: { eventId: string; hasRsvped:
     return (
       <button disabled className="rounded-ui bg-accent px-4 py-3 font-medium text-white disabled:opacity-80">
         You are attending this event
+      </button>
+    );
+  }
+
+  if (disabledReason) {
+    return (
+      <button disabled className="rounded-ui bg-neutral-300 px-4 py-3 font-medium text-ink disabled:opacity-80">
+        {disabledReason}
       </button>
     );
   }

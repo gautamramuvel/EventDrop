@@ -17,6 +17,8 @@ export default async function EventDetailPage({ params }: { params: Promise<{ ev
 
   if (!event || event.hiddenAt) notFound();
 
+  const eventEnded = new Date(event.endAt) <= new Date();
+
   return (
     <main className="mx-auto max-w-3xl px-4 py-8">
       <p className="text-sm font-semibold uppercase text-accent">{event.category}</p>
@@ -46,7 +48,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ ev
         </div>
       </dl>
       <div className="mt-6">
-        <RsvpButton eventId={event.id} hasRsvped={event.viewerHasRsvped} />
+        <RsvpButton eventId={event.id} hasRsvped={event.viewerHasRsvped} disabledReason={eventEnded ? "This event has ended" : undefined} />
       </div>
       <ReportForm eventId={event.id} />
     </main>

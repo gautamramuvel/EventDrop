@@ -42,4 +42,16 @@ describe("RsvpButton", () => {
     fireEvent.click(button);
     expect(fetchMock).not.toHaveBeenCalled();
   });
+
+  it("disables RSVP when event has ended", () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+
+    render(<RsvpButton eventId="event_1" hasRsvped={false} disabledReason="This event has ended" />);
+
+    const button = screen.getByRole("button", { name: "This event has ended" });
+    expect(button).toBeDisabled();
+    fireEvent.click(button);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
 });
