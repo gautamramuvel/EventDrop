@@ -8,6 +8,8 @@ describe("parseEventQuery", () => {
     expect(query.category).toBe("all");
     expect(query.distanceMiles).toBe(5);
     expect(query.window).toBe("next24h");
+    expect(query.latitude).toBe(12.8452);
+    expect(query.longitude).toBe(80.0608);
   });
 
   it("parses explicit filters", () => {

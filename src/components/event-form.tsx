@@ -53,8 +53,8 @@ export function EventForm() {
       </select>
       <input name="addressText" required placeholder="Address or place name" className="rounded-ui border border-line p-3" />
       <div className="grid gap-3 sm:grid-cols-2">
-        <input name="latitude" required type="number" step="0.000001" defaultValue="40.730610" className="rounded-ui border border-line p-3" />
-        <input name="longitude" required type="number" step="0.000001" defaultValue="-73.935242" className="rounded-ui border border-line p-3" />
+        <input name="latitude" required type="number" step="0.000001" defaultValue="12.845200" className="rounded-ui border border-line p-3" />
+        <input name="longitude" required type="number" step="0.000001" defaultValue="80.060800" className="rounded-ui border border-line p-3" />
       </div>
       <input name="startAt" required type="datetime-local" className="rounded-ui border border-line p-3" />
       <select name="durationMinutes" className="rounded-ui border border-line p-3">

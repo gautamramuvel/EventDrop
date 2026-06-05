@@ -19,8 +19,8 @@ export function parseEventQuery(url: URL): EventQuery {
   const category = url.searchParams.get("category");
   const distance = Number(url.searchParams.get("distance") ?? "5");
   const window = url.searchParams.get("window") ?? "next24h";
-  const latitude = Number(url.searchParams.get("lat") ?? process.env.NEXT_PUBLIC_DEFAULT_LAT ?? "40.73061");
-  const longitude = Number(url.searchParams.get("lng") ?? process.env.NEXT_PUBLIC_DEFAULT_LNG ?? "-73.935242");
+  const latitude = Number(url.searchParams.get("lat") ?? process.env.NEXT_PUBLIC_DEFAULT_LAT ?? "12.845200");
+  const longitude = Number(url.searchParams.get("lng") ?? process.env.NEXT_PUBLIC_DEFAULT_LNG ?? "80.060800");
 
   return {
     category: category && EVENT_CATEGORIES.includes(category as EventCategory) ? (category as EventCategory) : "all",
